@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
 ros::NodeHandle n; // two lines to create a publisher object that can talk to ROS
     ros::Publisher my_publisher_object = n.advertise<std_msgs::Float64>("vel_cmd", 1);
-    //"topic1" is the name of the topic to which we will publish
+    //"vel_cmd" is the name of the topic to which we will publish
     // the "1" argument says to use a buffer size of 1; could make larger, if expect network backups
     
     std_msgs::Float64 input_float, vel_cmd; //create a variable of type "Float64", 
