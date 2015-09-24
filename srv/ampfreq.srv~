@@ -1,0 +1,6 @@
+#request amplitude, frequency
+float64 amplitude
+float64 frequency
+---
+#response amplitude, frequency
+bool ok

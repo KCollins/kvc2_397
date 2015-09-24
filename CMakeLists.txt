@@ -1,26 +1,52 @@
-cmake_minimum_required(VERSION 2.8.3)
+  
+
+    cmake_minimum_required(VERSION 2.8.3)
+
+# Here is what your project (package) is called.  Should be the same as your package.xml package name.
 project(kvc2_397)
 
-find_package(catkin_simple REQUIRED)
+## This is where you put all of the dependencies for the package.
+## When using catkin_create_pkg, this is one of the places where 
+## the dependencies are auto-placed.  If you need to add more later
+## on, you need to put them in manually. 
 
-catkin_simple()
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  message_generation
+)
 
-# example boost usage
-# find_package(Boost REQUIRED COMPONENTS system thread)
+## Tell catkin about your services here so it will properly generate
+## the required header files
 
-# C++0x support - not quite the same as final C++11!
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+add_service_files(
+	FILES
+	ampfreq.srv
+)
 
-# Libraries
-# cs_add_library(my_lib src/my_lib.cpp)   
+## Message / service dependencies go here!  Ie, if you have a 
+## geometry_msgs/Twist in your message / service, you should
+## put 'geometry_msgs' here.
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+)
 
-# Executables
-cs_add_executable(minimal_commander src/minimal_commander.cpp)
-cs_add_executable(minimal_captain src/minimal_captain.cpp)
-# cs_add_executable(minimal_controller src/minimal_controller.cpp)
-# cs_add_executable(minimal_simulator src/minimal_simulator.cpp)
-# target_link_library(example my_lib)
+catkin_package()
 
-cs_install()
-cs_export()
-    
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+## This stuff tells catkin to compile your node!
+add_executable(minimal_commander src/minimal_commander.cpp)
+target_link_libraries(minimal_commander
+   ${catkin_LIBRARIES}
+)
+
+## This stuff tells catkin to compile your node!
+add_executable(minimal_captain src/minimal_captain.cpp)
+target_link_libraries(minimal_captain
+   ${catkin_LIBRARIES}
+)

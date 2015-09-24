@@ -1,7 +1,18 @@
 #include <ros/ros.h>
 #include <stdio.h>
 #include <std_msgs/Float64.h>
+#include <kvc2_397/ampfreq.h>
 #define PI 3.141592653589
+
+bool add(kvc2_397::ampfreq::Request &amp,
+			kvc2_397::ampfreq::Request &freq)
+
+{
+	return true;
+}
+
+
+
 
 int main(int argc, char **argv)
 {
@@ -12,9 +23,12 @@ int main(int argc, char **argv)
 	amplitude=10;
 	frequency=10;
 
-
-
-ros::NodeHandle n; // two lines to create a publisher object that can talk to ROS
+ros::NodeHandle n;
+    ros::ServiceClient client = n.serviceClient<kvc2_397::ampfreq>("lookup_by_name");
+    kvc2_397::ampfreq srv;
+    bool handshake = true;
+    
+//ros::NodeHandle n; // two lines to create a publisher object that can talk to ROS
     ros::Publisher my_publisher_object = n.advertise<std_msgs::Float64>("vel_cmd", 1);
     //"vel_cmd" is the name of the topic to which we will publish
     // the "1" argument says to use a buffer size of 1; could make larger, if expect network backups
@@ -45,5 +59,4 @@ ros::NodeHandle n; // two lines to create a publisher object that can talk to RO
 	naptime.sleep(); 
     }
 	ros::spin();
-
 }
