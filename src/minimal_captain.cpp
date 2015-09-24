@@ -12,25 +12,25 @@ int main(int argc, char **argv)
 		ros::init(argc, argv, "minimal_captain");
 		ROS_INFO("Node for PS2. Prompts the user to enter a frequency and an amplitude, then sends off those values as a service request to the vel-comm node..");
 ros::NodeHandle n;
-   ros::ServiceClient client = n.serviceClient<kvc2_397::ampfreq>("lookup_by_name");
+   ros::ServiceClient client = n.serviceClient<kvc2_397::ampfreq>("amp_freq");
     kvc2_397::ampfreq srv;
     bool handshake = false;
     while (ros::ok()) {
 
 	cout << "Hello world!!!!\n";  // prints Hello
-	  double amplitude;
+	  double amp;
   	cout << "Please enter a value for the amplitude: ";
-  	cin >> amplitude;
-  	cout << "The value you entered for the amplitude is " << amplitude;
+  	cin >> amp;
+  	cout << "The value you entered for the amplitude is " << amp;
   	cout << ".\n";
-    return amplitude;
+    srv.request.amp=amp;
 
-  	double frequency;
-  	cout << "Please enter a value for the velocity: ";
-  	cin >> frequency;
-  	cout << "The value you entered for the velocity is " << frequency;
+  	double freq;
+  	cout << "Please enter a value for the frequency: ";
+  	cin >> freq;
+  	cout << "The value you entered for the frequency is " << freq;
   	cout << ".\n";
-    return frequency;
+    srv.request.freq=freq;
     }
 
 
