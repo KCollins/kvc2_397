@@ -9,10 +9,15 @@ double frequency = 10;
 bool callback(kvc2_397::ampfreqRequest& request, kvc2_397::ampfreqResponse& response)
 {
     ROS_INFO("callback activated");
-    //double amp(amp); //let's convert this
-    //double freq(freq)
-  amplitude=11;
-  frequency=11;
+    // double amp(amp); //let's convert this
+    // double freq(freq)
+    // amplitude=11;
+    // frequency=11;
+    double in_amp(request.amp); // typecasting
+    double in_freq(request.freq); // typecasting
+    response.handshake=false;
+    amplitude=in_amp;
+    frequency=in_freq;
 }
 
 int main(int argc, char **argv)
@@ -21,12 +26,13 @@ int main(int argc, char **argv)
   ROS_INFO("New node based on minimal_publisher node.");
 
 
-
-
 ros::NodeHandle n;// two lines to create a publisher object that can talk to ROS
     ros::Publisher my_publisher_object = n.advertise<std_msgs::Float64>("vel_cmd", 1);
     // "vel_cmd" is the name of the topic to which we will publish
     // the "1" argument says to use a buffer size of 1; could make larger, if expect network backups
+
+    ros::ServiceServer service = n.advertiseService("amp_freq", callback);
+    ROS_INFO("Ready to accept amplitude and frequency values.");
     
     std_msgs::Float64 input_float, vel_cmd; //create a variable of type "Float64", 
     // as defined in: /opt/ros/indigo/share/std_msgs
