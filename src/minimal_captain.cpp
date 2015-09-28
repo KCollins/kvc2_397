@@ -10,11 +10,11 @@ using namespace std;
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "minimal_captain");
-    ROS_INFO("Node for PS2. Prompts the user to enter a frequency and an amplitude, then sends off those values as a service request to the vel-comm node..");
+    ROS_INFO("Node for PS2. Prompts the user to enter a frequency and an amplitude, then sends off those values as a service request to the vel-comm node.");
 ros::NodeHandle n;
     ros::ServiceClient client = n.serviceClient<kvc2_397::ampfreq>("amp_freq");
     kvc2_397::ampfreq srv;
-    bool handshake = false;
+    return true;
 while (ros::ok()) {
 
 	cout << "Hello world!!!!\n";  // prints Hello
@@ -33,6 +33,11 @@ while (ros::ok()) {
     srv.request.freq=in_freq;
     }
 
+    if (client.call(srv)) {
+      ROS_INFO("Successful call.");
+    } 
+    else ROS_WARN("Call not successful.");
 
-     ros::spin();
+
+     ros::spinOnce();
 }
