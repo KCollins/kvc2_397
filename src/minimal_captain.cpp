@@ -31,13 +31,13 @@ while (ros::ok()) {
     cout << "The value you entered for the frequency is " << in_freq;
     cout << ".\n";
     srv.request.freq=in_freq;
-    }
+    
 
     if (client.call(srv)) {
       ROS_INFO("Successful call.");
     } 
     else ROS_WARN("Call not successful.");
 
-
      ros::spinOnce();
+   }
 }
