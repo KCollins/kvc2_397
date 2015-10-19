@@ -50,3 +50,15 @@ add_executable(minimal_captain src/minimal_captain.cpp)
 target_link_libraries(minimal_captain
    ${catkin_LIBRARIES}
 )
+
+   ## This stuff tells catkin to compile your node!
+add_executable(minimal_simulator src/minimal_simulator.cpp)
+target_link_libraries(minimal_simulator
+   ${catkin_LIBRARIES}
+)
+
+      ## This stuff tells catkin to compile your node!
+add_executable(minimal_controller src/minimal_controller.cpp)
+target_link_libraries(minimal_controller
+   ${catkin_LIBRARIES}
+)

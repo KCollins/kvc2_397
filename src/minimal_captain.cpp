@@ -14,7 +14,6 @@ int main(int argc, char **argv)
 ros::NodeHandle n;
     ros::ServiceClient client = n.serviceClient<kvc2_397::ampfreq>("amp_freq");
     kvc2_397::ampfreq srv;
-    return true;
 while (ros::ok()) {
 
 	cout << "Hello world!!!!\n";  // prints Hello
@@ -40,4 +39,5 @@ while (ros::ok()) {
 
      ros::spinOnce();
    }
+   return true;
 }
