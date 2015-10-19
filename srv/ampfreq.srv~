@@ -1,6 +1,0 @@
-#request amplitude, frequency
-float64 amp
-float64 frequency
----
-#response amplitude, frequency
-bool handshake
